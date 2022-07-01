@@ -47,13 +47,15 @@ e.preventDefault()
         <option value='santhosh'>{a.username}</option>
       </>)}
     </select>
+    {errors?.userId&&errors.userId}
     <label for='title'>title
     </label>
     <input type='text' alt='' name='title' className='inputtext' value={values.title} onChange={handlechange}/>
-    {errors?.title&&errors.title}
+    {errors?.body&&errors.body}
     <label for='body'>body
     </label>
     <input type='text' alt='' name='body' className='inputtext' value={values.body} onChange={handlechange}/>
+    {errors?.title&&errors.title}
     <input type='submit' className='submitbtn'/>
     </form>
    </div>
