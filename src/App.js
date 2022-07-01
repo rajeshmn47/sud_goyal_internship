@@ -33,6 +33,12 @@ setValues({...values,[name]:value})
 }
 const handlesubmit=(e)=>{
 e.preventDefault()
+if(validate()){
+  console.log('ok bro')
+}
+else{
+  console.log('sorry bro')
+}
 }
   return (
     <>
@@ -40,7 +46,7 @@ e.preventDefault()
   <form  onSubmit={handlesubmit} className='form'>
     <label for='user'>choose the user
     </label>
-    <select name='user' id='user' className='select' value={values.user} onChange={handlechange}>
+    <select name='user' id='user' className='select' value={values.userId} onChange={handlechange}>
     <option value='santhosh'>choose the user</option>
       {users?.map((a)=><>
 
