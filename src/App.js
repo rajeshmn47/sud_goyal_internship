@@ -1,67 +1,62 @@
 import logo from './logo.svg';
 import './App.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { validate } from './validation';
 
 function App() {
+  const [users,setUsers]=useState()
+  const [errors,setErrors]=useState()
+  const initialvalues={
+    title:'',
+    body:'',
+    userId:''
+  }
+  const[values,setValues]=useState(initialvalues)
   useEffect(()=>{
 setTimeout(() => {
   fetch('https://jsonplaceholder.typicode.com/users').then(e=>e.json())
-  .then(data=>console.log(data))
+  .then(data=>{
+    console.log(data)
+    setUsers(data)})
 
 
 }, 4000);
   },[])
-
+  useEffect(()=>{
+validate (values,errors,setErrors)
+console.log(errors,'yt')
+  },[values])
+const handlechange=(e)=>{
+  var name=e.target.name
+   var value=e.target.value
+setValues({...values,[name]:value})
+}
+const handlesubmit=(e)=>{
+e.preventDefault()
+}
   return (
     <>
-    <div className="app">
-    <h5>krajesh</h5>
-    <p>
-    JavaScript can be confusing and downright weird at times,
-     but there is so much you can do with it. 
-     Developers who learn JavaScript usually limit themselves 
-    to coding challenges and classic web projects such as a portfolio
-    </p>
-    <h5>
-    JavaScript can be confusing and downright weird at times,
-     but there is so much you can do with it. 
-     Developers who learn JavaScript usually limit themselves 
-    to coding challenges and classic web projects such as a portfolio  
-    </h5>
+   <div className='app'>
+  <form  onSubmit={handlesubmit} className='form'>
+    <label for='user'>choose the user
+    </label>
+    <select name='user' id='user' className='select' value={values.user} onChange={handlechange}>
+    <option value='santhosh'>choose the user</option>
+      {users?.map((a)=><>
 
-    </div>
-      <div className="apps">
-      <h5>krajesh</h5>
-      <p>
-      JavaScript can be confusing and downright weird at times,
-       but there is so much you can do with it. 
-       Developers who learn JavaScript usually limit themselves 
-      to coding challenges and classic web projects such as a portfolio
-      </p>
-      <h5>
-      JavaScript can be confusing and downright weird at times,
-       but there is so much you can do with it. 
-       Developers who learn JavaScript usually limit themselves 
-      to coding challenges and classic web projects such as a portfolio  
-      </h5>
-  
-      </div>
-      <div className="stops">
-    <h5>krajesh</h5>
-    <p>
-    JavaScript can be confusing and downright weird at times,
-     but there is so much you can do with it. 
-     Developers who learn JavaScript usually limit themselves 
-    to coding challenges and classic web projects such as a portfolio
-    </p>
-    <h5>
-    JavaScript can be confusing and downright weird at times,
-     but there is so much you can do with it. 
-     Developers who learn JavaScript usually limit themselves 
-    to coding challenges and classic web projects such as a portfolio  
-    </h5>
-
-    </div>
+        <option value='santhosh'>{a.username}</option>
+      </>)}
+    </select>
+    <label for='title'>title
+    </label>
+    <input type='text' alt='' name='title' className='inputtext' value={values.title} onChange={handlechange}/>
+    {errors?.title&&errors.title}
+    <label for='body'>body
+    </label>
+    <input type='text' alt='' name='body' className='inputtext' value={values.body} onChange={handlechange}/>
+    <input type='submit' className='submitbtn'/>
+    </form>
+   </div>
       </>
   );
 }
