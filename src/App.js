@@ -42,16 +42,26 @@ const handlechange=(e)=>{
   console.log('tyui',e.target.value,e.target.name)
   var name=e.target.name
    var value=e.target.value
-setValues({...values,[name]:value})
+   console.log(value,'goat')
+   if(name==='userId'){
+    var a=users.find((u)=>u.username===value)
+    console.log(a,'googly')
+    setValues({...values,[name]:a})
+   }
+   else{
+   setValues({...values,[name]:value})
+   }
 validate ({[name]:value,values,errors,setErrors})
 }
 const handlesubmit=(e)=>{
 e.preventDefault()
 if(validate()){
   console.log('ok bro')
+  var obj={userId:values.userId.id,body:values.body,title:values.title}
+  var data=JSON.stringify(obj);
   fetch('https://jsonplaceholder.typicode.com/posts', {
     method: "post", headers: {'Content-Type': 'application/json'}, 
-    body: values,
+    body:data,
 })
 }
 else{
@@ -66,21 +76,21 @@ else{
     <label for='user'>choose the user
     </label>
     <select name='userId' id='userId' className='select' value={values?.userId&&values.userId} onChange={handlechange}>
-    <option value={values?.username?values.username:'choose the user'}>{values?.username?values.username:'choose the user'}</option>
+    <option value={values?.username?values.username:'choose the user'}>{values?.userId.username?values.userId.username:'choose the user'}</option>
       {users?.map((a)=><>
 
-        <option value={a}>{a.username}</option>
+        <option  key = {a.id} value={a.username}>{a.username}</option>
       </>)}
     </select>
-    {errors?.username&&errors.username}
+    <h5 className='error'>{errors?.username&&errors.username}</h5>
     <label for='title'>title
     </label>
     <input type='text' alt='' name='title' className='inputtext' value={values?.title&&values.title} onChange={handlechange}/>
-    {errors?.title&&errors.title} 
+    <h5 className='error'>{errors?.title&&errors.title}</h5> 
     <label for='body'>body
     </label>
     <input type='text' alt='' name='body' className='inputtext' value={values?.body&&values.body} onChange={handlechange}/>
- {errors?.body&&errors.body}
+    <h5 className='error'>{errors?.body&&errors.body}</h5>
     <input type='submit' className='submitbtn'/>
     </form>
    </div>

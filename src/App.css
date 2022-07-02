@@ -2,6 +2,12 @@
   text-align: center;
   font-family:'sans-serif';
   padding: 1vmax;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  box-sizing: border-box;
+  background-color: #fafafa;
 }
 
 .form{
@@ -13,6 +19,8 @@
   align-items: flex-start;
   text-transform: capitalize;
   overflow: hidden;
+  background-color: #FFFFFF;
+  padding: 4vh 4vw;
 }
 .inputtext{
   height: 5vh;
