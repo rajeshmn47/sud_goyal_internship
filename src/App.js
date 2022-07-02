@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 function App() {
   const [users,setUsers]=useState()
+  const [notification,setNotification]=useState(false)
   const [errors,setErrors]=useState()
   const initialvalues={
     title:'',
@@ -68,6 +69,9 @@ else{
   alert('fill all the fields')
   console.log('sorry bro')
 }
+setTimeout(() => {
+ setNotification(true) 
+}, 2000);
 }
   return (
     <>
@@ -92,6 +96,7 @@ else{
     <input type='text' alt='' name='body' className='inputtext' value={values?.body&&values.body} onChange={handlechange}/>
     <h5 className='error'>{errors?.body&&errors.body}</h5>
     <input type='submit' className='submitbtn'/>
+    <h5 className='error'>{notification&&'Posted successfully'}</h5>
     </form>
    </div>
       </>

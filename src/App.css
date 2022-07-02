@@ -41,3 +41,6 @@
   border-radius: 5px;
   text-transform: uppercase;
 }
+.error{
+  color: red;
+}
