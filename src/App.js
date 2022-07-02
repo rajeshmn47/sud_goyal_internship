@@ -64,6 +64,7 @@ if(validate()){
     method: "post", headers: {'Content-Type': 'application/json'}, 
     body:data,
 })
+setValues(initialvalues)
 }
 else{
   alert('fill all the fields')
