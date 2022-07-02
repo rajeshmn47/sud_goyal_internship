@@ -69,8 +69,9 @@ else{
   alert('fill all the fields')
   console.log('sorry bro')
 }
+setNotification(true)
 setTimeout(() => {
- setNotification(true) 
+ setNotification(false) 
 }, 2000);
 }
   return (
